@@ -13,11 +13,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run Newman tests
-        continue-on-error: true
-        run: npx newman run "./collections/Newman Failing Tests.postman_collection.json" -r cli,json --reporter-json-export newman/newman-run-report.json
-
-      - name: Run Newman tests
-        run: npx newman run "./collections/Newman Simple.postman_collection.json"  -r cli,htmlextra --reporter-htmlextra-export newman/html-report.html
+        run: npx newman run "./collections/Newman Failing Tests.postman_collection.json" -r cli,json,htmlextra --reporter-json-export newman/newman-run-report.json
       - name: Upload HTML Report as Artifact
         uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }}
